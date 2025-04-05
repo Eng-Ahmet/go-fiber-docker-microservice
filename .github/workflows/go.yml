@@ -20,8 +20,17 @@ jobs:
         with:
           go-version: "1.20"
 
-      - name: Build
-        run: go build -v ./...
+      - name: Build Service 1
+        working-directory: ./service1
+        run: go build -v .
+
+      - name: Build Service 2
+        working-directory: ./service2
+        run: go build -v .
+
+      - name: Build API Gateway
+        working-directory: ./api-gateway
+        run: go build -v .
 
       - name: Test
         run: go test -v ./...
