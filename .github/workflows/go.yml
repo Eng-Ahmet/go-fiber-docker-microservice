@@ -32,8 +32,11 @@ jobs:
       - name: List Files in Root
         run: ls -la
 
-      - name: List Files in Docker Directory
-        run: ls -la docker
+      - name: Build Docker Image for Service 1
+        run: docker build ./service1 --file ./service1/Dockerfile --tag service1:$(date +%s)
 
-      - name: Build Docker Image
-        run: docker build . --file docker/Dockerfile --tag my-image-name
+      - name: Build Docker Image for Service 2
+        run: docker build ./service2 --file ./service2/Dockerfile --tag service2:$(date +%s)
+
+      - name: Build Docker Image for API Gateway
+        run: docker build ./api-gateway --file ./api-gateway/Dockerfile --tag api-gateway:$(date +%s)
