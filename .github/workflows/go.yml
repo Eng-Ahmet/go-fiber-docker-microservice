@@ -24,15 +24,24 @@ jobs:
         working-directory: ./service1
         run: go build -v .
 
+      - name: Test Service 1
+        working-directory: ./service1
+        run: go test -v ./...
+
       - name: Build Service 2
         working-directory: ./service2
         run: go build -v .
+
+      - name: Test Service 2
+        working-directory: ./service2
+        run: go test -v ./...
 
       - name: Build API Gateway
         working-directory: ./api-gateway
         run: go build -v .
 
-      - name: Test
+      - name: Test API Gateway
+        working-directory: ./api-gateway
         run: go test -v ./...
 
       - name: Print Working Directory
