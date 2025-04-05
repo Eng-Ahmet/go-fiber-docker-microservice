@@ -2,17 +2,36 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      - uses: actions/checkout@v4
+
+      - name: Print Working Directory
+        run: pwd
+
+      - name: List Files in Root
+        run: ls -la
+
+      - name: List Files in Service 1 Directory
+        run: ls -la ./service1
+
+      - name: List Files in Service 2 Directory
+        run: ls -la ./service2
+
+      - name: List Files in API Gateway Directory
+        run: ls -la ./api-gateway
+
+      - name: Build Docker Image for Service 1
+        run: docker build ./service1 --file ./service1/Dockerfile --tag service1:$(date +%s)
+
+      - name: Build Docker Image for Service 2
+        run: docker build ./service2 --file ./service2/Dockerfile --tag service2:$(date +%s)
+
+      - name: Build Docker Image for API Gateway
+        run: docker build ./api-gateway --file ./api-gateway/Dockerfile --tag api-gateway:$(date +%s)
