@@ -26,5 +26,14 @@ jobs:
       - name: Test
         run: go test -v ./...
 
+      - name: Print Working Directory
+        run: pwd
+
+      - name: List Files in Root
+        run: ls -la
+
+      - name: List Files in Docker Directory
+        run: ls -la docker
+
       - name: Build Docker Image
         run: docker build . --file docker/Dockerfile --tag my-image-name:$(date +%s)
